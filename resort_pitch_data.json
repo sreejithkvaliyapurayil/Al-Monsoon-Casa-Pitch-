@@ -1,9 +1,9 @@
 {
   "market_data": {
     "luxury_hotel_market_india": {
-      "2025_value": "₹15 Crore",
-      "2030_projected": "₹23 Crore",
-      "cagr": "27.06%",
+      "2025_value": "$2.99 billion",
+      "2030_projected": "$4.83 billion",
+      "cagr": "10.06%",
       "occupancy_rates": "72-74%",
       "arr_premium": "\u20b98,000-8,400"
     },
@@ -15,17 +15,18 @@
       "wellness_revenue_share": "40%"
     },
     "development_costs": {
-      "luxury_hotel_per_key": "\u20b91.94 Lakhs",
-      "construction_timeline": "12-20 months",
+      "luxury_hotel_per_key": "\u20b91.94 crores",
+      "construction_timeline": "42-51 months",
       "expected_roi": "9-12% annually"
     }
   },
   "resort_concept": {
-    "name": "Wayanad Backwater Wellness Retreat",
+    "name": "Al Monsoon-Casa Riviera",
+    "tagline": "Where Luxury and Wellness meets in Malabar",
     "location": "Wayanad Backwaters, Kerala",
-    "total_area": "5 acres",
+    "total_area": "15 acres",
     "key_features": [
-      "Private Wellness Center (similar to Luxury Wellness model)",
+      "Private Wellness Center (similar to Tulah model)",
       "Unique Continental Restaurant & Luxury Cafe",
       "Exclusive Clubhouse with Membership Program",
       "Floating Cottages on Backwaters",
@@ -61,66 +62,65 @@
       ]
     },
     "membership_model": {
-      "initiation_fee": "\u20b95-15 lakhs",
-      "annual_dues": "\u20b92-5 lakhs",
-      "expected_members": "500-750",
-      "projected_membership_revenue": "\u20b915-2 crores annually"
+      "initiation_fee": "\u20b92-5 lakhs",
+      "annual_dues": "\u20b950,000-1.5 lakhs",
+      "expected_members": "150-200",
+      "projected_membership_revenue": "\u20b975 lakhs-1 crore annually"
     }
   },
   "facilities": {
     "accommodation": {
-      "floating_cottages": 16,
-      "pool_villas": 24,
-      "wellness_suites": 12,
-      "presidential_suite": 2,
-      "total_units": 54
+      "floating_cottages": 4,
+      "pool_villas": 8,
+      "wellness_suites": 3,
+      "presidential_suite": 1,
+      "total_units": 16
     },
     "dining": {
-      "continental_fine_dining": "80 covers",
-      "luxury_cafe": "40 covers",
-      "floating_restaurant": "60 covers",
-      "private_dining_rooms": 3
+      "continental_fine_dining": "30 covers",
+      "luxury_cafe": "20 covers",
+      "floating_restaurant": "25 covers",
+      "private_dining_rooms": 1
     },
     "wellness_center": {
-      "treatment_rooms": 14,
+      "treatment_rooms": 4,
       "sonorium": 1,
-      "meditation_pavilions": 3,
-      "yoga_studios": 2,
-      "hydrotherapy_pools": 2
+      "meditation_pavilions": 1,
+      "yoga_studios": 1,
+      "hydrotherapy_pools": 1
     },
     "clubhouse": {
-      "meeting_rooms": 5,
-      "banquet_hall": "300 capacity",
+      "meeting_rooms": 2,
+      "banquet_hall": "100 capacity",
       "sports_facilities": [
-        "Tennis court",
         "Fitness center",
         "Indoor games"
       ],
       "recreational_areas": [
         "Library",
-        "Cigar lounge",
-        "Wine cellar"
+        "Lounge"
       ]
     },
     "water_activities": {
-      "kayaking_fleet": 20,
-      "luxury_boats": 4,
+      "kayaking_fleet": 8,
+      "luxury_boats": 2,
       "fishing_equipment": "Professional grade",
-      "water_sports_center": "Full facility"
+      "water_sports_center": "Compact facility"
     }
   },
   "financial_projections": {
-    "project_cost": "\u20b935 crores",
-    "land_cost": "\u20b95 crores",
-    "construction_cost": "\u20b925 crores",
-    "furniture_equipment": "\u20b95 crores",
+    "project_cost": "\u20b915 crores",
+    "land_cost": "\u20b92.1 crores",
+    "construction_cost": "\u20b910.7 crores",
+    "furniture_equipment": "\u20b92.1 crores",
     "revenue_streams": {
-      "accommodation": "\u20b9100 Lakhs/year",
-      "dining": "\u20b940 Lakhs/year",
-      "wellness": "\u20b935 Lakhs/year",
-      "membership": "\u20b920 Lakhs/year",
-      "activities": "\u20b915 Lakhs/year"
+      "accommodation": "\u20b97.7 crores/year",
+      "dining": "\u20b91.9 crores/year",
+      "wellness": "\u20b91.5 crores/year",
+      "membership": "\u20b90.86 crores/year",
+      "activities": "\u20b90.64 crores/year"
     },
+    "total_annual_revenue": "\u20b912.6 crores",
     "projected_ebitda": "35-40%",
     "payback_period": "7-8 years"
   },
@@ -131,5 +131,11 @@
     "Membership-based recurring revenue model",
     "Sustainable construction reducing environmental impact",
     "Strategic location accessing both backwaters and hill station tourism"
-  ]
+  ],
+  "scaling_info": {
+    "original_cost": "\u20b9350 crores",
+    "new_cost": "\u20b915 crores",
+    "scaling_factor": "0.0429",
+    "scale_description": "Boutique luxury resort model"
+  }
 }
