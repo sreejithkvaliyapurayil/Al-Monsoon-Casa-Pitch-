@@ -342,9 +342,9 @@ Our investment team will contact you within 24 hours to schedule a detailed pres
 Please ensure your contact information is available for our team to reach you.
 
 Project Details:
-• Investment Amount: ₹350 Crores
+• Investment Amount: ₹15 Crores
 • Expected ROI: 9-12% annually
-• Construction Timeline: 30 months
+• Construction Timeline: 20 months
 
 We look forward to discussing this exclusive opportunity with you.`;
         
