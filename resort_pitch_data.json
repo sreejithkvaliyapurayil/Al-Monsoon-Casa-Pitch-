@@ -1,0 +1,135 @@
+{
+  "market_data": {
+    "luxury_hotel_market_india": {
+      "2025_value": "$2.99 billion",
+      "2030_projected": "$4.83 billion",
+      "cagr": "10.06%",
+      "occupancy_rates": "72-74%",
+      "arr_premium": "\u20b98,000-8,400"
+    },
+    "kerala_wellness_tourism": {
+      "foreign_exchange_contribution": "70-80%",
+      "growth_rate": "6.5% YoY",
+      "foreign_tourists_2023": "287,730",
+      "domestic_tourists_2022": "18,867,414",
+      "wellness_revenue_share": "40%"
+    },
+    "development_costs": {
+      "luxury_hotel_per_key": "\u20b91.94 crores",
+      "construction_timeline": "42-51 months",
+      "expected_roi": "9-12% annually"
+    }
+  },
+  "resort_concept": {
+    "name": "Wayanad Backwater Wellness Retreat",
+    "location": "Wayanad Backwaters, Kerala",
+    "total_area": "50 acres",
+    "key_features": [
+      "Private Wellness Center (similar to Tulah model)",
+      "Unique Continental Restaurant & Luxury Cafe",
+      "Exclusive Clubhouse with Membership Program",
+      "Floating Cottages on Backwaters",
+      "Water Leisure Activities Hub",
+      "Japanese Wooden Plug-and-Play Construction",
+      "Private Pool Villas",
+      "Family Entertainment Zones"
+    ],
+    "unique_selling_points": [
+      "First Japanese wooden modular luxury resort in Kerala",
+      "Authentic Continental cuisine with raw stakes specialty",
+      "Floating accommodation experience on pristine backwaters",
+      "Holistic wellness integration following Tulah model",
+      "Exclusive membership clubhouse for recurring revenue",
+      "Sustainable plug-and-play construction reducing timeline by 40%"
+    ]
+  },
+  "target_segments": {
+    "primary_guests": [
+      "High Net Worth Individuals (HNI)",
+      "International wellness tourists",
+      "Corporate executives seeking retreats",
+      "Luxury leisure travelers"
+    ],
+    "demographics": {
+      "age_group": "35-54 years (70% of luxury travelers)",
+      "income_level": "\u20b975+ lakhs annually",
+      "origin_markets": [
+        "Delhi-NCR",
+        "Mumbai",
+        "Bangalore",
+        "International (UK, UAE, Germany)"
+      ]
+    },
+    "membership_model": {
+      "initiation_fee": "\u20b95-15 lakhs",
+      "annual_dues": "\u20b92-5 lakhs",
+      "expected_members": "500-750",
+      "projected_membership_revenue": "\u20b915-25 crores annually"
+    }
+  },
+  "facilities": {
+    "accommodation": {
+      "floating_cottages": 16,
+      "pool_villas": 24,
+      "wellness_suites": 12,
+      "presidential_suite": 2,
+      "total_units": 54
+    },
+    "dining": {
+      "continental_fine_dining": "80 covers",
+      "luxury_cafe": "40 covers",
+      "floating_restaurant": "60 covers",
+      "private_dining_rooms": 3
+    },
+    "wellness_center": {
+      "treatment_rooms": 14,
+      "sonorium": 1,
+      "meditation_pavilions": 3,
+      "yoga_studios": 2,
+      "hydrotherapy_pools": 2
+    },
+    "clubhouse": {
+      "meeting_rooms": 5,
+      "banquet_hall": "300 capacity",
+      "sports_facilities": [
+        "Tennis court",
+        "Fitness center",
+        "Indoor games"
+      ],
+      "recreational_areas": [
+        "Library",
+        "Cigar lounge",
+        "Wine cellar"
+      ]
+    },
+    "water_activities": {
+      "kayaking_fleet": 20,
+      "luxury_boats": 4,
+      "fishing_equipment": "Professional grade",
+      "water_sports_center": "Full facility"
+    }
+  },
+  "financial_projections": {
+    "project_cost": "\u20b9350 crores",
+    "land_cost": "\u20b950 crores",
+    "construction_cost": "\u20b9250 crores",
+    "furniture_equipment": "\u20b950 crores",
+    "revenue_streams": {
+      "accommodation": "\u20b9180 crores/year",
+      "dining": "\u20b945 crores/year",
+      "wellness": "\u20b935 crores/year",
+      "membership": "\u20b920 crores/year",
+      "activities": "\u20b915 crores/year"
+    },
+    "projected_ebitda": "35-40%",
+    "payback_period": "7-8 years"
+  },
+  "competitive_advantages": [
+    "First-mover advantage with Japanese modular construction in Kerala",
+    "Unique floating cottage experience in Wayanad",
+    "Tulah-inspired wellness model with authentic Ayurveda",
+    "Membership-based recurring revenue model",
+    "Sustainable construction reducing environmental impact",
+    "Strategic location accessing both backwaters and hill station tourism"
+  ]
+}
