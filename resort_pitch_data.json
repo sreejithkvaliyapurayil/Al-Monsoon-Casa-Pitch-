@@ -1,9 +1,9 @@
 {
   "market_data": {
     "luxury_hotel_market_india": {
-      "2025_value": "$2.99 billion",
-      "2030_projected": "$4.83 billion",
-      "cagr": "10.06%",
+      "2025_value": "₹15 Crore",
+      "2030_projected": "₹23 Crore",
+      "cagr": "27.06%",
       "occupancy_rates": "72-74%",
       "arr_premium": "\u20b98,000-8,400"
     },
@@ -15,17 +15,17 @@
       "wellness_revenue_share": "40%"
     },
     "development_costs": {
-      "luxury_hotel_per_key": "\u20b91.94 crores",
-      "construction_timeline": "42-51 months",
+      "luxury_hotel_per_key": "\u20b91.94 Lakhs",
+      "construction_timeline": "12-20 months",
       "expected_roi": "9-12% annually"
     }
   },
   "resort_concept": {
     "name": "Wayanad Backwater Wellness Retreat",
     "location": "Wayanad Backwaters, Kerala",
-    "total_area": "50 acres",
+    "total_area": "5 acres",
     "key_features": [
-      "Private Wellness Center (similar to Tulah model)",
+      "Private Wellness Center (similar to Luxury Wellness model)",
       "Unique Continental Restaurant & Luxury Cafe",
       "Exclusive Clubhouse with Membership Program",
       "Floating Cottages on Backwaters",
@@ -64,7 +64,7 @@
       "initiation_fee": "\u20b95-15 lakhs",
       "annual_dues": "\u20b92-5 lakhs",
       "expected_members": "500-750",
-      "projected_membership_revenue": "\u20b915-25 crores annually"
+      "projected_membership_revenue": "\u20b915-2 crores annually"
     }
   },
   "facilities": {
@@ -110,16 +110,16 @@
     }
   },
   "financial_projections": {
-    "project_cost": "\u20b9350 crores",
-    "land_cost": "\u20b950 crores",
-    "construction_cost": "\u20b9250 crores",
-    "furniture_equipment": "\u20b950 crores",
+    "project_cost": "\u20b935 crores",
+    "land_cost": "\u20b95 crores",
+    "construction_cost": "\u20b925 crores",
+    "furniture_equipment": "\u20b95 crores",
     "revenue_streams": {
-      "accommodation": "\u20b9180 crores/year",
-      "dining": "\u20b945 crores/year",
-      "wellness": "\u20b935 crores/year",
-      "membership": "\u20b920 crores/year",
-      "activities": "\u20b915 crores/year"
+      "accommodation": "\u20b9100 Lakhs/year",
+      "dining": "\u20b940 Lakhs/year",
+      "wellness": "\u20b935 Lakhs/year",
+      "membership": "\u20b920 Lakhs/year",
+      "activities": "\u20b915 Lakhs/year"
     },
     "projected_ebitda": "35-40%",
     "payback_period": "7-8 years"
