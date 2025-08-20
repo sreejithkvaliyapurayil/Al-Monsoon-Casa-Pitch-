@@ -19,32 +19,67 @@ class PitchDeck {
         // Set total slides
         this.totalSlidesSpan.textContent = this.totalSlides;
         
+        // Set background images for slides FIRST
+        this.setupBackgroundImages();
+        
         // Set up event listeners
         this.setupEventListeners();
-        
-        // Set background images for slides
-        this.setupBackgroundImages();
         
         // Initialize first slide
         this.updateSlide();
         
         // Preload critical images
         this.preloadImages();
+        
+        // Force setup CTA buttons after a delay
+        setTimeout(() => {
+            this.setupCTAButtons();
+        }, 2000);
     }
     
     setupEventListeners() {
-        // Navigation buttons - Fix navigation issues
-        this.prevBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.previousSlide();
-        });
-        
-        this.nextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.nextSlide();
-        });
+        // Navigation buttons - Enhanced click handling
+        if (this.prevBtn && this.nextBtn) {
+            // Remove any existing listeners
+            this.prevBtn.onclick = null;
+            this.nextBtn.onclick = null;
+            
+            // Add comprehensive event listeners
+            ['click', 'mousedown', 'touchend'].forEach(eventType => {
+                this.prevBtn.addEventListener(eventType, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log(`Previous button ${eventType}`);
+                    this.previousSlide();
+                    return false;
+                });
+                
+                this.nextBtn.addEventListener(eventType, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log(`Next button ${eventType}`);
+                    this.nextSlide();
+                    return false;
+                });
+            });
+            
+            // Direct onclick handlers as backup
+            this.prevBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Direct onclick previous');
+                this.previousSlide();
+                return false;
+            };
+            
+            this.nextBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Direct onclick next');
+                this.nextSlide();
+                return false;
+            };
+        }
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
@@ -101,20 +136,14 @@ class PitchDeck {
             startX = null;
             startY = null;
         });
-        
-        // Remove click navigation on slides to prevent conflicts
-        // this.slidesContainer.addEventListener('click', (e) => {
-        //     // Removed to prevent conflicts with CTA buttons
-        // });
-        
-        // CTA button interactions - Fix button behavior
-        this.setupCTAButtons();
     }
     
     setupBackgroundImages() {
-        this.slides.forEach(slide => {
+        console.log('Setting up background images...');
+        this.slides.forEach((slide, index) => {
             const bgImage = slide.dataset.bg;
             if (bgImage) {
+                console.log(`Setting background for slide ${index + 1}: ${bgImage}`);
                 slide.style.backgroundImage = `url("${bgImage}")`;
                 slide.style.backgroundSize = 'cover';
                 slide.style.backgroundPosition = 'center';
@@ -124,23 +153,57 @@ class PitchDeck {
     }
     
     setupCTAButtons() {
-        // Add event listeners to CTA buttons in the last slide
+        // Find all CTA buttons in the last slide
         const ctaButtons = document.querySelectorAll('.cta-buttons .btn');
-        ctaButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+        console.log('Setting up CTA buttons, found:', ctaButtons.length);
+        
+        if (ctaButtons.length === 0) {
+            console.log('No CTA buttons found, retrying in 1 second...');
+            setTimeout(() => this.setupCTAButtons(), 1000);
+            return;
+        }
+        
+        ctaButtons.forEach((button, index) => {
+            console.log(`Setting up button ${index}: ${button.textContent}`);
+            
+            // Remove existing event listeners by cloning the button
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            
+            // Add comprehensive event listeners
+            ['click', 'mousedown', 'touchend'].forEach(eventType => {
+                newButton.addEventListener(eventType, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log(`CTA Button ${eventType}:`, newButton.textContent);
+                    
+                    if (newButton.textContent.includes('Schedule')) {
+                        this.handleScheduleMeeting();
+                    } else if (newButton.textContent.includes('Download')) {
+                        this.handleDownloadProposal();
+                    }
+                    return false;
+                });
+            });
+            
+            // Direct onclick handler
+            newButton.onclick = (e) => {
                 e.preventDefault();
-                e.stopPropagation(); // Prevent slide navigation
+                e.stopPropagation();
+                console.log('Direct onclick CTA:', newButton.textContent);
                 
-                if (button.textContent.includes('Schedule')) {
+                if (newButton.textContent.includes('Schedule')) {
                     this.handleScheduleMeeting();
-                } else if (button.textContent.includes('Download')) {
+                } else if (newButton.textContent.includes('Download')) {
                     this.handleDownloadProposal();
                 }
-            });
+                return false;
+            };
         });
     }
     
     nextSlide() {
+        console.log('NextSlide called, current:', this.currentSlide, 'total:', this.totalSlides);
         if (this.currentSlide < this.totalSlides - 1) {
             this.currentSlide++;
             this.updateSlide();
@@ -148,6 +211,7 @@ class PitchDeck {
     }
     
     previousSlide() {
+        console.log('PreviousSlide called, current:', this.currentSlide);
         if (this.currentSlide > 0) {
             this.currentSlide--;
             this.updateSlide();
@@ -171,20 +235,29 @@ class PitchDeck {
         // Update slide counter
         this.currentSlideSpan.textContent = this.currentSlide + 1;
         
-        // Update progress bar - Fix progress bar calculation
+        // Update progress bar
         const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
         this.progressFill.style.width = `${progress}%`;
         
-        // Update navigation button states - Fix button state logic
-        this.prevBtn.disabled = this.currentSlide === 0;
-        this.nextBtn.disabled = this.currentSlide === (this.totalSlides - 1);
-        
-        // Update button opacity for disabled state
-        this.prevBtn.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
-        this.nextBtn.style.opacity = this.currentSlide === (this.totalSlides - 1) ? '0.5' : '1';
+        // Update navigation button states
+        if (this.prevBtn && this.nextBtn) {
+            this.prevBtn.disabled = this.currentSlide === 0;
+            this.nextBtn.disabled = this.currentSlide === (this.totalSlides - 1);
+            
+            // Update button opacity for disabled state
+            this.prevBtn.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
+            this.nextBtn.style.opacity = this.currentSlide === (this.totalSlides - 1) ? '0.5' : '1';
+        }
         
         // Add slide transition effects
         this.addSlideEffects();
+        
+        // Re-setup CTA buttons when on last slide
+        if (this.currentSlide === this.totalSlides - 1) {
+            setTimeout(() => {
+                this.setupCTAButtons();
+            }, 500);
+        }
         
         // Track slide views (for analytics if needed)
         this.trackSlideView();
@@ -306,9 +379,9 @@ class PitchDeck {
     }
     
     preloadImages() {
-        // Preload the next few slide backgrounds for smooth transitions
+        // Preload the key slide backgrounds for smooth transitions
         const imagesToPreload = [
-            'https://pplx-res.cloudinary.com/image/upload/v1755675368/pplx_project_search_images/a25c146383166e6412f9b9ee8f83c2becf7e5f75.png',
+            'https://pplx-res.cloudinary.com/image/upload/v1755678473/pplx_project_search_images/a9e0b5bf98829c2bd6fa08b78e95c3f6f3b88a9b.png',
             'https://pplx-res.cloudinary.com/image/upload/v1755675368/pplx_project_search_images/30e9b319ab461ef7afccecf2e254837405848c04.png',
             'https://pplx-res.cloudinary.com/image/upload/v1755675368/pplx_project_search_images/61ef954afa215de97865007ef38675960dfbf597.png',
             'https://pplx-res.cloudinary.com/image/upload/v1755364454/pplx_project_search_images/263e65a631ddd5b906c50ed6e46fca1c7de832d1.png',
@@ -318,6 +391,8 @@ class PitchDeck {
         
         imagesToPreload.forEach(src => {
             const img = new Image();
+            img.onload = () => console.log(`Preloaded: ${src}`);
+            img.onerror = () => console.error(`Failed to preload: ${src}`);
             img.src = src;
         });
     }
@@ -334,79 +409,82 @@ class PitchDeck {
     }
     
     handleScheduleMeeting() {
+        console.log('Schedule meeting handler called');
         // Create a professional modal-like alert for scheduling
-        const message = `Thank you for your interest in the Wayanad Backwater Wellness Retreat!
+        const message = `🏨 Al Monsoon-Casa Riviera Investment Opportunity
+
+Thank you for your interest in our boutique luxury resort project!
+
+✅ MEETING REQUEST SUBMITTED
 
 Our investment team will contact you within 24 hours to schedule a detailed presentation.
 
-Please ensure your contact information is available for our team to reach you.
+📋 PROJECT HIGHLIGHTS:
+• Resort Name: Al Monsoon-Casa Riviera
+• Investment: ₹15 Crores (Boutique Scale)
+• Annual Revenue: ₹12.6 Crores
+• ROI: 9-12% annually
+• Timeline: 30 months to completion
+• Location: Wayanad Backwaters, Kerala
 
-Project Details:
-• Investment Amount: ₹15 Crores
-• Expected ROI: 9-12% annually
-• Construction Timeline: 20 months
+🏖️ UNIQUE FEATURES:
+• 4 Floating Cottages (First in Kerala)
+• Japanese Modular Construction
+• Tulah-inspired Wellness Center
+• 16 Premium Accommodation Units
+• Exclusive Clubhouse Membership
 
-We look forward to discussing this exclusive opportunity with you.`;
+We look forward to discussing this exclusive boutique luxury resort opportunity with you!
+
+Contact: Investment Relations Team
+Email: investors@almonsoonriviera.com`;
         
         alert(message);
-        console.log('Schedule meeting request submitted for Wayanad Backwater Wellness Retreat');
     }
     
     handleDownloadProposal() {
+        console.log('Download proposal handler called');
         // Create a professional modal-like alert for downloading
-        const message = `Wayanad Backwater Wellness Retreat - Detailed Investment Proposal
+        const message = `📄 Al Monsoon-Casa Riviera - Investment Proposal
 
-Your download will begin shortly. The proposal includes:
+✅ DOWNLOAD INITIATED
 
-• Complete financial projections and ROI analysis
-• Detailed architectural plans and renderings
-• Market research and competitive analysis
-• Legal structure and investment terms
-• Development timeline and milestones
-• Risk assessment and mitigation strategies
+Your detailed investment proposal is being prepared...
 
-File Size: ~15MB
-Format: PDF Document
+📋 PROPOSAL CONTENTS:
+• Executive Summary & Investment Overview
+• Complete Financial Projections & ROI Analysis
+• Detailed Architectural Plans & Renderings
+• Market Research & Competitive Analysis
+• Legal Structure & Investment Terms
+• Development Timeline & Milestones
+• Risk Assessment & Mitigation Strategies
 
-Thank you for your interest in this exclusive investment opportunity.`;
+🏨 BOUTIQUE PROJECT DETAILS:
+• Investment Amount: ₹15 Crores
+• Annual Revenue: ₹12.6 Crores
+• 16 Premium Units (4 Floating Cottages)
+• Japanese Modular Construction
+• 15-acre Waterfront Property
+• Tulah-inspired Wellness Center
+
+📱 FILE DETAILS:
+• Format: PDF Document
+• Size: ~8MB
+• Pages: 45+ detailed pages
+• High-resolution renderings included
+
+Thank you for your interest in Al Monsoon-Casa Riviera - Kerala's most exclusive boutique resort investment opportunity!
+
+Download will complete in 3-5 seconds...`;
         
         alert(message);
-        console.log('Download proposal request submitted for Wayanad Backwater Wellness Retreat');
         
         // In a real application, this would trigger an actual file download
         // For demo purposes, we'll simulate the download
         setTimeout(() => {
-            console.log('Proposal download completed');
+            console.log('✅ Al Monsoon-Casa Riviera proposal download completed');
         }, 2000);
-    }
-    
-    // Auto-advance functionality (optional)
-    startAutoAdvance(intervalMs = 30000) {
-        this.autoAdvanceInterval = setInterval(() => {
-            if (this.currentSlide < this.totalSlides - 1) {
-                this.nextSlide();
-            } else {
-                this.stopAutoAdvance();
-            }
-        }, intervalMs);
-    }
-    
-    stopAutoAdvance() {
-        if (this.autoAdvanceInterval) {
-            clearInterval(this.autoAdvanceInterval);
-            this.autoAdvanceInterval = null;
-        }
-    }
-    
-    // Fullscreen toggle
-    toggleFullscreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(err => {
-                console.log('Error attempting to enable fullscreen:', err);
-            });
-        } else {
-            document.exitFullscreen();
-        }
     }
 }
 
@@ -508,49 +586,45 @@ styleSheet.textContent = `
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     }
     
-    /* Loading state for slides */
-    .slide.loading {
-        background-color: var(--color-slate-900);
+    /* Enhanced navigation button styles */
+    .nav-btn {
+        cursor: pointer !important;
+        position: relative;
+        z-index: 1001;
+        pointer-events: auto !important;
     }
     
-    .slide.loading::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 40px;
-        height: 40px;
-        margin: -20px 0 0 -20px;
-        border: 3px solid var(--color-primary);
-        border-radius: 50%;
-        border-top-color: transparent;
-        animation: spin 1s linear infinite;
+    .nav-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+        animation: glow 2s ease-in-out infinite;
+    }
+    
+    .nav-btn:active:not(:disabled) {
+        transform: scale(0.95);
+    }
+    
+    /* Enhanced CTA button styles */
+    .cta-buttons .btn {
+        cursor: pointer !important;
+        position: relative;
         z-index: 10;
+        pointer-events: auto !important;
     }
     
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
+    .cta-buttons .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.4);
     }
     
-    /* Ensure progress bar is visible */
-    .progress-bar {
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 4px !important;
-        background: rgba(var(--color-slate-900-rgb), 0.3) !important;
-        z-index: 1000 !important;
-        display: block !important;
+    .cta-buttons .btn:active {
+        transform: scale(0.98);
     }
     
-    .progress-fill {
-        height: 100% !important;
-        background: linear-gradient(90deg, var(--color-primary), var(--color-teal-300)) !important;
-        transition: width var(--duration-normal) var(--ease-standard) !important;
-        display: block !important;
+    /* Force background images to display */
+    .slide[data-bg] {
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 `;
 
@@ -558,40 +632,37 @@ document.head.appendChild(styleSheet);
 
 // Initialize the pitch deck when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    const pitchDeck = new PitchDeck();
+    console.log('🏨 Initializing Al Monsoon-Casa Riviera Pitch Deck...');
     
-    // Make pitch deck instance globally available for debugging
-    window.pitchDeck = pitchDeck;
-    
-    // Add keyboard shortcut hints
-    console.log('Pitch Deck Controls:');
-    console.log('← → : Navigate slides');
-    console.log('Space: Next slide');
-    console.log('Home: First slide');
-    console.log('End: Last slide');
-    console.log('Swipe left/right on mobile');
-    
-    // Optional: Start auto-advance after a delay (uncomment if desired)
-    // setTimeout(() => {
-    //     pitchDeck.startAutoAdvance(45000); // 45 seconds per slide
-    // }, 10000);
+    // Wait for images to potentially load
+    setTimeout(() => {
+        const pitchDeck = new PitchDeck();
+        
+        // Make pitch deck instance globally available for debugging
+        window.pitchDeck = pitchDeck;
+        
+        // Add keyboard shortcut hints
+        console.log('🎮 Al Monsoon-Casa Riviera Pitch Deck Controls:');
+        console.log('← → : Navigate slides');
+        console.log('Space: Next slide');
+        console.log('Home: First slide');
+        console.log('End: Last slide');
+        console.log('📱 Swipe left/right on mobile');
+        
+        console.log('✅ Al Monsoon-Casa Riviera pitch deck initialized successfully');
+    }, 500);
 });
 
-// Handle visibility change to pause auto-advance when tab is not visible
+// Handle visibility change
 document.addEventListener('visibilitychange', () => {
-    if (window.pitchDeck) {
-        if (document.hidden) {
-            window.pitchDeck.stopAutoAdvance();
-        }
-        // Auto-advance can be restarted manually if needed
+    if (window.pitchDeck && document.hidden) {
+        console.log('Document hidden, stopping any auto-advance');
     }
 });
 
 // Handle window resize for responsive adjustments
 window.addEventListener('resize', () => {
-    // Recalculate layouts if needed
     if (window.pitchDeck) {
-        // Force a layout recalculation
         window.pitchDeck.updateSlide();
     }
 });
@@ -608,7 +679,7 @@ document.addEventListener('selectstart', (e) => {
 
 // Enhanced error handling
 window.addEventListener('error', (e) => {
-    console.error('Pitch deck error:', e.error);
+    console.error('Al Monsoon-Casa Riviera pitch deck error:', e.error);
 });
 
 // Performance monitoring
@@ -616,7 +687,9 @@ if ('performance' in window) {
     window.addEventListener('load', () => {
         setTimeout(() => {
             const perfData = performance.getEntriesByType('navigation')[0];
-            console.log(`Pitch deck loaded in ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+            if (perfData) {
+                console.log(`✅ Al Monsoon-Casa Riviera pitch deck loaded in ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+            }
         }, 0);
     });
 }
